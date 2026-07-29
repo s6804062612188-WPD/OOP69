@@ -46,9 +46,9 @@ public class problem07 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		
-		System.out.println("Enter's rectangle 1's center (x,y), width, and height:\t");
+		System.out.println("Enter's rectangle 1's center (x,y), width, and height:");
 		Rectangle a = new Rectangle(input.nextDouble(), input.nextDouble(), input.nextDouble(), input.nextDouble());
-		System.out.println("Enter's rectangle 2's center (x,y), width, and height:\t");
+		System.out.println("Enter's rectangle 2's center (x,y), width, and height:");
 		Rectangle b = new Rectangle(input.nextDouble(), input.nextDouble(), input.nextDouble(), input.nextDouble());
 		int state = RectCheck.RectangleCheck(a,b);
 		switch(state) {
