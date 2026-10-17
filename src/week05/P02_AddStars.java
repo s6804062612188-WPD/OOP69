@@ -3,7 +3,7 @@ package week05;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class problem02 {
+public class P02_AddStars {
 	public static boolean isInteger(String text) {
 		try {
 			Integer.parseInt(text);
@@ -32,12 +32,12 @@ public class problem02 {
 	} 
 	
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
 		String line;
 		ArrayList<String> list = new ArrayList<>();
 		while (true) {
-			line = input.nextLine();
+			line = sc.nextLine();
 			
 			if (isInteger(line)) { break; }
 			list.add(line);
@@ -45,7 +45,7 @@ public class problem02 {
 		int amount = Integer.parseInt(line);
 		int cmd=0;
 		for (int i=0; i<amount; i=i+1) {
-			cmd = input.nextInt();
+			cmd = sc.nextInt();
 			if (cmd == 1) { list = addStars(list); }
 			if (cmd == 2) { list = removeStars(list); }
 			System.out.println(list);

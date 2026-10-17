@@ -2,12 +2,12 @@ package week04;
 
 import java.util.Scanner;
 
-class field {
+class Field {
 	int h[][];
 	int row;
 	int col;
-	
-	field(int r, int c) {
+
+	Field(int r, int c) {
 		this.row = r;
 		this.col = c;
 		this.h = new int[r][c];
@@ -28,67 +28,75 @@ class field {
 			System.out.println();
 		}
 	}
-	
-	public void findPikachu() {
-		class spawnPoint {
-			public int a; public int b;
-			public int sum;
-			
-			spawnPoint(int a, int b) {
-				this.a = a;
-				this.b = b;
-				this.sum = 0;
-			}
-			public boolean isValid(int a, int b) {
-				return (0 <= a && a < row && 0 <= b && b < col);
-			}
-			private boolean check(int sum, boolean ver) {
-				int ta=0, tb=1;
-				if (ver) { ta = 1;	tb = 0; }
-				if (!isValid(a,b) || !isValid(a+ta,b+tb)) return false;
 
-				int curSum = h[a][b] + h[a+ta][b+tb];
-				if (sum >= curSum) return false;
-				if ( Math.abs(h[a][b] - h[a+ta][b+tb]) > 10) return false;
-				this.sum = curSum;
-//				System.out.printf("%d,%d to %d,%d = %d\n",a, b, a+ta, b+tb, curSum);
-				return true;
+	public void findPikachu() {
+		int bestSum = Integer.MIN_VALUE;
+		int bestI = -1, bestJ = -1;
+
+		for (int i = 0; i < row; i++) {
+			for (int j = 0; j < col; j++) {
+
+				// 1. Scan right
+				if (j + 1 < col) {
+					int a = h[i][j];
+					int b = h[i][j + 1];
+
+					if (Math.abs(a - b) <= 10) {
+						int sum = a + b;
+
+						if (sum > bestSum) {
+							bestSum = sum;
+							bestI = i; bestJ = j;
+						}
+					}
+				}
+
+				// 2. Scan down
+				if (i + 1 < row) {
+					int a = h[i][j];
+					int b = h[i + 1][j];
+
+					if (Math.abs(a - b) <= 10) {
+						int sum = a + b;
+
+						if (sum > bestSum) {
+							bestSum = sum;
+							bestI = i; bestJ = j;
+						}
+					}
+				}
 			}
 		}
-		
-		int spawnI=-1, spawnJ=-1, sum=Integer.MIN_VALUE;
-		
-		for (int i=0; i<row; i=i+1) {
-			for (int j=0; j<col; j=j+1) { 
-				spawnPoint ch = new spawnPoint(i,j);
-				if (ch.check(sum, true)) {
-					sum = ch.sum;
-					spawnI = i;	spawnJ = j;
-				}
-				if (ch.check(sum, false)) {
-					sum = ch.sum;
-					spawnI = i;	spawnJ = j;
-				}
-			}
-		}
-		
-		if (spawnI == -1 && spawnJ == -1) {
+
+		if (bestI == -1) {
 			System.out.println("No pikachu has spawned.");
-			return;
 		} else {
-			System.out.printf("%d %d\n", ++spawnI, ++spawnJ);
+			System.out.printf("%d %d%n", bestI + 1, bestJ + 1);
 		}
-		
 	}
 }
 
 public class problem08 {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		
-		field h = new field(input.nextInt(), input.nextInt());
+
+		Field h = new Field(input.nextInt(), input.nextInt());
 		h.input(input);
 //		h.print();
 		h.findPikachu();
 	}
-} 
+}
+
+/*
+4 5
+5 1 2 10 4
+4 30 3 0 100
+3 25 10 4 10
+3 20 4 8 5
+
+4 4
+0 0 0 0
+0 0 0 0
+0 1 1 1
+1 1 0 0
+*/

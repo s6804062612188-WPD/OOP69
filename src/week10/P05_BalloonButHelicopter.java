@@ -191,14 +191,14 @@ class Player extends Thing implements Exists{
 	}
 
 	public void keyPressed(int key) {
-		switch(key) {
+		switch (key) {
 			case KeyEvent.VK_LEFT -> left = true;
 			case KeyEvent.VK_RIGHT -> right = true;
 			case KeyEvent.VK_UP -> up = true;
 		}
 	}
 	public void keyReleased(int key) {
-		switch(key) {
+		switch (key) {
 			case KeyEvent.VK_LEFT -> left = false;
 			case KeyEvent.VK_RIGHT -> right = false;
 			case KeyEvent.VK_UP -> up = false;

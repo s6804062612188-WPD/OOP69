@@ -2,6 +2,7 @@ package week05;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 class ALI { // ArrayList of Integers
 	public final ArrayList<Integer> list;
@@ -12,6 +13,7 @@ class ALI { // ArrayList of Integers
 			if (temp == 0) { break; }
 			list.add(temp);
 		}
+		Collections.sort(list);
 	}
 }
 
@@ -37,12 +39,13 @@ final class SortMergeList {
 	}
 }
 
-public class problem03 {
+public class P03_SortMergeList {
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 		
-		ALI A = new ALI(input);
-		ALI B = new ALI(input);
+		ALI A = new ALI(sc);
+		ALI B = new ALI(sc);
+		
 		ArrayList<Integer> C = SortMergeList.intersect(A.list, B.list);
 		for (Integer thing : C) {
 			System.out.print(thing + " ");

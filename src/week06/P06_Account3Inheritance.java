@@ -1,8 +1,8 @@
 //DIRECTLY COPIED FROM week2.problem06;
 package week06;
 
-import static java.lang.System.out;
 import java.time.LocalDate;
+import java.util.Scanner;
 
 
 class Date {
@@ -33,7 +33,7 @@ class Date {
 			this.day = day;
 			this.month = month.toUpperCase();
 		} else {
-//			System.out.println("Invalid datetime / Uninitialized datetime");
+//			System.System.out.println("Invalid datetime / Uninitialized datetime");
 			LocalDate now = LocalDate.now();
 			this.day = now.getDayOfMonth();
 			this.month = now.getMonth().name();
@@ -44,7 +44,7 @@ class Date {
 	private boolean isLeapYear(int year) {
 		return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 	}
-	
+
 	public int getDay() { return day; }
 
 	public String getMonth() { return month; }
@@ -67,7 +67,7 @@ class Date {
 	}
 
 	public int getYear() { return year; }
-	
+
 	public String printDate() {
 		return day + " " + month + " " + year;
 	}
@@ -78,7 +78,7 @@ class Person {
 	private String surname;
 	private int age;
 	private Date bDate;
-	
+
 	public Person() {
 		this("[UNNAMED FIRST NAME]", "[UNNAMED LAST NAME]", -1, new Date());
 	}
@@ -93,16 +93,16 @@ class Person {
 	}
 	public String getName() { return name; }
 	public void setName(String name) { this.name = name; }
-	
+
 	public String getSurname() { return surname; }
 	public void setSurname(String surname) { this.surname = surname; }
-	
+
 	public int getAge() { return age; }
 	public void setAge(int age) { this.age = age; }
-	
+
 	public Date getbDate() { return bDate; }
 	public void setbDate(Date bDate) { this.bDate = bDate; }
-	
+
 }
 
 class Account {
@@ -111,7 +111,7 @@ class Account {
 	private double balance;
 	private double AnnualInterestRate;
 	private Date dateCreated;
-	
+
 	public Account() {
 		this(new Person(), 0,0,0, new Date());
 	}
@@ -122,49 +122,49 @@ class Account {
 		this.AnnualInterestRate = AIR;
 		this.dateCreated = dated;
 	}
-	
-	public int getID() {return this.id;}
-	public double getBalance() {return this.balance;}
-	public double getAIR() {return this.AnnualInterestRate;}
-	public Date getDate() {return this.dateCreated;}
-	
-	public double getMonthlyInterestRate() {return this.AnnualInterestRate/100.0/12.0;}
-	public double getMonthlyInterest() {return balance*getMonthlyInterestRate();}
-	
+
+	public int getID() { return this.id; }
+	public double getBalance() { return this.balance; }
+	public double getAIR() { return this.AnnualInterestRate; }
+	public Date getDate() { return this.dateCreated; }
+
+	public double getMonthlyInterestRate() { return this.AnnualInterestRate/100.0/12.0; }
+	public double getMonthlyInterest() { return balance*getMonthlyInterestRate(); }
+
 	public double getInterest() {
 		Date now = new Date();
-		
+
 		int interval = ( now.getYear() - dateCreated.getYear() )*12;
 		interval += now.getNumericMonth() - dateCreated.getNumericMonth();
-		
+
 		return interval*getMonthlyInterest();
 	}
 	public double getCompoundInterest() {
 		Date now = new Date();
-		
+
 		int interval = ( now.getYear() - dateCreated.getYear() )*12;
 		interval += now.getNumericMonth() - dateCreated.getNumericMonth();
-		
+
 		double compound = balance;
 		for (int i=0; i<interval; i=i+1) {
 			compound += compound*getMonthlyInterestRate();
 		}
 		return compound;
 	}
-	
-	public void withdraw(double w) {this.balance -= w;}
-	public void deposit(double d) {this.balance += d;}
-	
+
+	public void withdraw(double w) { this.balance -= w; }
+	public void deposit(double d) { this.balance += d; }
+
 	public void transferMoney(Account acc1, double amount) {
 		if (this.balance < amount) {
-			out.println("You're broke, transfer unsuccessful.");
+			System.out.println("You're broke, transfer unsuccessful.");
 			return;
 		}
-		
+
 		this.withdraw(amount);
 		acc1.deposit(amount);
 	}
-	
+
 	@Override
 	public String toString() {
 		String ret = "-------------------------------\n";
@@ -190,10 +190,10 @@ class SavingAccount extends Account {
 	@Override
 	public void transferMoney(Account acc1, double amount) {
 		if (super.getBalance() < amount + 20) {
-			out.println("You're broke, transfer unsuccessful.");
+			System.out.println("You're broke, transfer unsuccessful.");
 			return;
 		}
-		
+
 		this.withdraw(amount+20);	
 		acc1.deposit(amount);
 	}
@@ -207,11 +207,31 @@ class FixAccount extends Account {
 	}
 	@Override
 	public void transferMoney(Account acc1, double amount) {
-		out.println("Nuh uh. You may not transfer, this is a Fixed account.");
+		System.out.println("Nuh uh. You may not transfer, this is a Fixed account.");
 	}
 }
 
-public class problem06 {
+public class P06_Account3Inheritance {
 	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+
+		System.out.println("Enter your name and surname, age, and birth day");
+		String name = input.next();
+		String surname = input.next();
+		int age = input.nextInt();
+		Date bDate = new Date(input.nextInt(), input.next(), input.nextInt());
+		Person p1123 = new Person(name, surname, bDate);
+		SavingAccount a1123 = new SavingAccount(p1123, 1123, 20000, 4.5, new Date());
+
+		Person temp = new Person("John", "Doe", -1, new Date() );
+		Account a1100 = new Account(temp , 1100, 0.0, 0.0, new Date());
+
+		a1123.withdraw(2500);
+		a1123.deposit(3000);
+
+		a1123.transferMoney(a1100, 1000);
+
+		System.out.print(a1123.toString());
+		System.out.print(a1100.toString());
 	}
 }

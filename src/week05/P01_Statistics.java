@@ -3,25 +3,25 @@ package week05;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class problem01 {
+public class P01_Statistics {
 	public static void main(String[] args) {
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 
 		System.out.println("/Press enter twice to continue the program.../");
 		ArrayList<Integer> list = new ArrayList<>();
 		ArrayList<Integer> filtered = new ArrayList<>();
 		while (true) {
-			String line = input.nextLine();
+			String line = sc.nextLine();
 			
 			if (line.isEmpty()) { break; }
 			
-			Scanner sc = new Scanner(line);
-			while (sc.hasNextInt()) {
-				int temp = sc.nextInt();
+			Scanner liner = new Scanner(line);
+			while (liner.hasNextInt()) {
+				int temp = liner.nextInt();
 				list.add(temp);
 				if (temp%2==1) { filtered.add(temp); }
 			}
-			sc.close();
+			liner.close();
 		}
 		if ( list.isEmpty() ) {
 			System.out.println("You haven't added anything.");

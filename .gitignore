@@ -1,4 +1,12 @@
+# Build output directories
 /build/
 /dist/
+
+# NetBeans private project configuration
 /nbproject/private/
+
+# Compiled Java class files
 /*.class
+
+# Microsoft Word temporary lock files
+~$*.docx
