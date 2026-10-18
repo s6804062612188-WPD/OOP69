@@ -21,7 +21,7 @@ class CheckTriangle {
 	}
 	public static int orientation(double x0, double y0, double x1, double y1, double x2, double y2) {
 		double temp = (x1 - x0)*(y2-y0) - (y1-y0)*(x2-x0); // cross-product
-		
+
 		if (temp > 0) return 1;
 		else if (temp < 0) return 2;
 		return 0;
@@ -31,19 +31,19 @@ class CheckTriangle {
 public class problem09a {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		
+
 		double x0 = input.nextDouble();
 		double y0 = input.nextDouble();
 		double x1 = input.nextDouble();
 		double y1 = input.nextDouble();
 		double x2 = input.nextDouble();
 		double y2 = input.nextDouble();
-		
+
 		String left = "LEFT", right = "RIGHT";
 		if ( y0 == y1 ) {
 			System.out.println("the line's slope is 0, meaning that left and right does not exists");
 			System.out.println("instead, it's top or bottom of the line");
-			    if (x1 > x0) {
+				if (x1 > x0) {
 					left = "TOP";
 					right = "BOTTOM";
 				} else {
