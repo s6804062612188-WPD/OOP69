@@ -5,11 +5,11 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collections;
 
-class UFO {
+class UFO2 {
 	int start;
 	int end;
 	
-	UFO(int a, int b) {
+	UFO2(int a, int b) {
 		this.start = a;
 		this.end = b;
 	}
@@ -39,14 +39,14 @@ public class problem10b {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		
-		int UFOCount, laserCount;
+		int UFO2Count, laserCount;
 		
-		UFOCount = input.nextInt();
+		UFO2Count = input.nextInt();
 		laserCount = input.nextInt();
 		
-		ArrayList<UFO> invasion = new ArrayList<>();
-		for (int i=0; i<UFOCount; i=i+1) {
-			invasion.add( new UFO( input.nextInt(), input.nextInt() ) );
+		ArrayList<UFO2> invasion = new ArrayList<>();
+		for (int i=0; i<UFO2Count; i=i+1) {
+			invasion.add( new UFO2( input.nextInt(), input.nextInt() ) );
 		}
 		
 		ArrayList<Integer> strikes = new ArrayList<>();
@@ -56,7 +56,7 @@ public class problem10b {
 		Collections.sort(strikes);
 		
 		int abduct = 0;
-		for (UFO u : invasion) {
+		for (UFO2 u : invasion) {
 			abduct += lowerBound(strikes, u.end) - upperBound(strikes, u.start);
 		}
 		System.out.println(abduct);

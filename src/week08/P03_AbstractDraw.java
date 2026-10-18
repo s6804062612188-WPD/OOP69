@@ -1,4 +1,4 @@
-package week07;
+package week08;
 
 import java.awt.*;
 import javax.swing.*;
@@ -10,7 +10,7 @@ interface Function {
 
 abstract class AbstractDrawFunction extends JPanel implements Function {
 	public static ArrayList<AbstractDrawFunction> everything = new ArrayList<>();
-	
+
 	/**Polygon to hold the points*/
 	private Polygon p = new Polygon();
 	/**Default constructor*/
@@ -115,7 +115,7 @@ class LogF extends AbstractDrawFunction implements Function {
 	}
 }
 
-public class problem03 {
+public class P03_AbstractDraw {
 	public static void main(String[] args) {
 		SquareF panel1 = new SquareF();
 		SinF panel2 = new SinF();
@@ -124,9 +124,10 @@ public class problem03 {
 		Swap1F panel5 = new Swap1F();
 		Swap2F panel6 = new Swap2F();
 		LogF panel7 = new LogF();
-		
+
 		for (AbstractDrawFunction panel : AbstractDrawFunction.everything) {
 			JFrame frame = new JFrame();
+			frame.setTitle(panel.getClass().getSimpleName());
 			frame.setSize(400, 400);
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	//		frame.setLayout(new GridLayout(1, 2));
@@ -135,4 +136,3 @@ public class problem03 {
 		}
 	}
 }
-	
